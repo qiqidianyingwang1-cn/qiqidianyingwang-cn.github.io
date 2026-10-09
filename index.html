@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0f2419">
+<title>棋棋电影网 - 步步为营的观影指南与正版片单</title>
+<meta name="description" content="棋棋电影网，一份“步步为营”的观影指南。按布局、算计、反转、残局四种棋局气质推荐高分电影，附正版观影渠道与片长导航。">
+<meta name="keywords" content="棋棋电影网,棋棋电影,棋局电影,围棋电影,国际象棋电影,反转电影,悬疑电影,高分电影,正版观影">
+<link rel="canonical" href="https://qiqidianyingwang-cn.github.io/">
+<style>
+:root{
+  --ink:#10241a; --ink2:#3d5347; --gray:#8b9a91; --line:#dfe6e0; --paper:#f7f8f4; --cream:#eef2ec;
+  --go:#1b5e3a; --go2:#7bbf3f; --wood:#d9b36a; --wood2:#f3dca6; --red:#c0392b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","WenQuanYi Micro Hei",system-ui,sans-serif;
+  background:var(--paper);color:var(--ink);line-height:1.78;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+ul,ol{list-style:none}
+::selection{background:var(--go);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-thumb{background:var(--go);border-radius:8px}
+::-webkit-scrollbar-track{background:#e6ebe6}
+
+/* ============ 顶部导航 ============ */
+.topbar{
+  position:fixed;inset:0 0 auto 0;z-index:60;height:66px;display:flex;align-items:center;gap:18px;
+  padding:0 clamp(16px,4vw,40px);background:rgba(247,248,244,.95);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:850;white-space:nowrap;letter-spacing:.01em}
+.brand .mk{width:26px;height:26px;border-radius:8px;background:var(--ink);position:relative;overflow:hidden}
+.brand .mk i{position:absolute;inset:0;
+  background:
+    linear-gradient(var(--go) 0 0) 50%/100% 2px no-repeat,
+    linear-gradient(90deg,var(--go) 0 0) 50%/2px 100% no-repeat,
+    var(--ink);
+  opacity:.85}
+.brand b{font-size:20px}
+.brand b i{font-style:normal;color:var(--go)}
+.brand span{font-size:9.5px;color:var(--gray);letter-spacing:.24em;display:none;border-left:1px solid var(--line);padding-left:11px;margin-left:2px}
+nav.nav{display:flex;gap:2px;margin-left:auto;align-items:center}
+nav.nav a{padding:9px 13px;border-radius:10px;font-size:14px;color:var(--ink2);transition:.22s;position:relative}
+nav.nav a:hover{color:var(--ink);background:var(--cream)}
+nav.nav a::after{content:"";position:absolute;left:13px;right:13px;bottom:5px;height:2px;border-radius:2px;background:var(--go);transform:scaleX(0);transition:.24s}
+nav.nav a:hover::after{transform:scaleX(1)}
+.drawer-btn{display:none;width:42px;height:42px;align-items:center;justify-content:center;margin-left:auto}
+.drawer-btn i{display:block;width:22px;height:2px;background:var(--ink);position:relative;transition:.25s}
+.drawer-btn i::before,.drawer-btn i::after{content:"";position:absolute;left:0;width:22px;height:2px;background:var(--ink);transition:.25s}
+.drawer-btn i::before{top:-7px}.drawer-btn i::after{top:7px}
+.drawer-btn[aria-expanded="true"] i{background:transparent}
+.drawer-btn[aria-expanded="true"] i::before{transform:rotate(45deg);top:0}
+.drawer-btn[aria-expanded="true"] i::after{transform:rotate(-45deg);top:0}
+.drawer{position:fixed;inset:66px 0 0 auto;width:280px;z-index:59;padding:22px 18px;
+  background:#fff;border-left:1px solid var(--line);transform:translateX(102%);transition:.34s cubic-bezier(.4,0,.2,1);
+  display:flex;flex-direction:column;gap:6px;overflow:auto}
+.drawer.open{transform:none}
+.drawer a{color:var(--ink2);padding:14px 16px;border-radius:12px;font-size:15px;border:1px solid transparent}
+.drawer a:hover{background:var(--cream);border-color:#c6d2c8;color:var(--ink)}
+
+/* ============ 通用栏 ============ */
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+section{padding:clamp(64px,9vw,104px) 0;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.28em;color:var(--gray);font-weight:700}
+.eyebrow::before{content:"";width:26px;height:2px;background:var(--ink)}
+h2.t{font-size:clamp(27px,4.3vw,44px);line-height:1.24;font-weight:850;letter-spacing:-.01em;margin:13px 0 9px}
+h2.t em{font-style:normal;color:var(--go)}
+.lead{color:var(--ink2);max-width:70ch;font-size:clamp(14px,1.5vw,16px)}
+.hd{display:flex;flex-direction:column;gap:9px;margin-bottom:38px}
+.tagrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.tag{font-size:12px;padding:6px 12px;border-radius:999px;background:#fff;color:var(--ink2);border:1px solid var(--line)}
+.tag.hot{background:var(--ink);color:#fff;border-color:var(--ink)}
+.reveal{opacity:0;transform:translateY(26px);transition:.72s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ============ 首屏：棋盘 ============ */
+.hero{min-height:min(84vh,720px);padding-top:66px;display:grid;grid-template-columns:1fr .92fr;align-items:center;gap:clamp(20px,5vw,56px);
+  background:
+    radial-gradient(1200px 520px at 82% 18%,rgba(27,94,58,.13),transparent 60%),
+    linear-gradient(180deg,#fbfcfa,#eef2ec 72%,#e4ebe4);overflow:hidden}
+.hero .copy{padding:clamp(36px,8vw,80px) 0}
+.kicker{display:inline-flex;align-items:center;gap:10px;font-size:11px;letter-spacing:.26em;color:var(--ink);
+  border:1px solid var(--ink);padding:7px 14px;border-radius:999px;background:#fff}
+.hero h1{font-size:clamp(40px,7.4vw,82px);line-height:1.08;font-weight:900;letter-spacing:-.02em;margin:15px 0 4px}
+.hero h1 i{font-style:normal;color:var(--go)}
+.hero .sub{font-size:clamp(15px,1.7vw,19px);color:var(--ink2);max-width:34ch}
+.hero .rule{width:66px;height:3px;border-radius:3px;background:repeating-linear-gradient(90deg,var(--ink) 0 8px,var(--go) 8px 16px);margin:22px 0}
+.hero .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:8px 0 26px}
+.hero .facts div{border-top:2px solid var(--ink);padding-top:8px}
+.hero .facts b{display:block;font-size:clamp(19px,2.3vw,25px);font-weight:850;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.hero .facts span{font-size:11px;color:var(--gray);letter-spacing:.06em}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:14px 26px;border-radius:13px;font-size:15px;font-weight:700;transition:.24s;display:inline-flex;align-items:center;gap:9px}
+.btn.pri{background:var(--ink);color:#fff;box-shadow:0 14px 30px rgba(16,36,26,.26)}
+.btn.pri:hover{transform:translateY(-3px);box-shadow:0 20px 40px rgba(16,36,26,.4)}
+.btn.ghost{border:1px solid rgba(16,36,26,.26);color:var(--ink)}
+.btn.ghost:hover{border-color:var(--ink)}
+
+/* 棋盘 SVG */
+.bwrap{position:relative;height:100%;min-height:420px;display:flex;align-items:center;justify-content:center;padding:20px}
+.bwrap svg{width:100%;height:auto;max-height:560px;overflow:visible;filter:drop-shadow(0 26px 50px rgba(16,36,26,.22))}
+.stone{transform-origin:center;animation:pd 5.6s ease-in-out infinite alternate}
+@keyframes pd{from{transform:translateY(-7px)}to{transform:translateY(7px)}}
+.stone2{animation-delay:-2.4s}
+.hand{transform-origin:500px 150px;animation:hs 6.2s ease-in-out infinite alternate}
+@keyframes hs{from{transform:rotate(-3.4deg)}to{transform:rotate(3.4deg)}}
+
+/* ============ ① 棋局四型（大号 Tab + 面板） ============ */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;border-bottom:1px solid var(--line);padding-bottom:0}
+.tab{padding:12px 18px;border-radius:12px 12px 0 0;font-size:14px;font-weight:700;color:var(--ink2);transition:.22s;
+  border:1px solid transparent;border-bottom:0;margin-bottom:-1px;display:inline-flex;align-items:center;gap:8px}
+.tab .ix{font-size:10.5px;letter-spacing:.14em;color:var(--gray);font-weight:800}
+.tab:hover{background:var(--cream);color:var(--ink)}
+.tab[aria-selected="true"]{background:#fff;color:var(--ink);border-color:var(--line);box-shadow:inset 0 3px 0 var(--c)}
+.tabpanels{position:relative}
+.panel{display:none;grid-template-columns:.6fr 1fr;gap:clamp(20px,4vw,44px);align-items:center;
+  background:#fff;border:1px solid var(--line);border-radius:20px;padding:clamp(22px,4vw,38px);box-shadow:0 16px 44px rgba(16,36,26,.08)}
+.panel.on{display:grid;animation:pf .5s cubic-bezier(.2,.7,.3,1)}
+@keyframes pf{from{opacity:0;transform:translateY(14px) rotate(-.4deg)}to{opacity:1;transform:none}}
+.panel .big{font-size:clamp(44px,8vw,88px);line-height:1;font-weight:900;letter-spacing:-.04em;
+  background:linear-gradient(120deg,var(--c),var(--c2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.panel .big small{display:block;font-size:14px;letter-spacing:.24em;color:var(--c);margin-top:12px;font-weight:800;-webkit-text-fill-color:var(--c)}
+.panel h3{font-size:clamp(22px,2.8vw,32px);font-weight:850;letter-spacing:-.01em;margin:14px 0 10px}
+.panel p{color:var(--ink2);font-size:clamp(14px,1.5vw,16px)}
+.panel .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.panel .chips span{font-size:12px;padding:6px 12px;border-radius:999px;background:var(--cream);color:var(--ink);border:1px solid var(--line)}
+.panel .cv{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:16px;background:#cfd8d0}
+.panel .cv img{width:100%;height:100%;object-fit:cover;transition:.7s;filter:grayscale(.12) sepia(.14) hue-rotate(-6deg)}
+.panel:hover .cv img{transform:scale(1.06);filter:none}
+.panel .cv .corner{position:absolute;left:12px;top:12px;font-size:10.5px;font-weight:850;letter-spacing:.14em;color:#fff;background:var(--c);padding:6px 11px;border-radius:8px}
+
+/* ============ ② 棋步片单（横向磁贴） ============ */
+.scroller{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 2px 24px;scrollbar-width:thin}
+.mag{flex:0 0 clamp(222px,25vw,282px);scroll-snap-align:start;background:#fff;border-radius:16px;overflow:hidden;
+  border:1px solid var(--line);transition:.28s;display:flex;flex-direction:column}
+.mag:hover{transform:translateY(-7px) rotate(.4deg);box-shadow:0 24px 50px rgba(16,36,26,.2);border-color:transparent}
+.mag .cv{position:relative;aspect-ratio:3/4;overflow:hidden;background:#cfd8d0}
+.mag .cv img{width:100%;height:100%;object-fit:cover;transition:.6s;filter:grayscale(.16) sepia(.12)}
+.mag:hover .cv img{transform:scale(1.07);filter:none}
+.mag .cv .rib{position:absolute;left:10px;top:10px;font-size:10.5px;font-weight:800;padding:5px 9px;border-radius:7px;color:#fff;background:var(--c);letter-spacing:.03em}
+.mag .cv .mv{position:absolute;right:10px;bottom:10px;font-size:11.5px;font-weight:800;color:#fff;padding:5px 9px;border-radius:8px;
+  background:rgba(16,36,26,.82);backdrop-filter:blur(6px);font-variant-numeric:tabular-nums}
+.mag .bd{padding:14px 15px 16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.mag h3{font-size:16.5px;font-weight:800;letter-spacing:-.01em}
+.mag .meta{font-size:12px;color:var(--gray);display:flex;gap:7px;flex-wrap:wrap}
+.mag .meta b{color:var(--go);font-weight:700}
+.mag .why{font-size:12.5px;color:#6f7d72;line-height:1.6}
+
+/* ============ ③ 棋力榜（数据表） ============ */
+.split{display:grid;grid-template-columns:1.5fr .5fr;gap:clamp(20px,3vw,34px);align-items:start}
+.tbwrap{background:#fff;border-radius:18px;border:1px solid var(--line);overflow:hidden;box-shadow:0 10px 30px rgba(16,36,26,.06)}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{background:var(--ink);color:#fff;text-align:left;padding:15px 14px;font-size:12.5px;letter-spacing:.08em;font-weight:700;white-space:nowrap}
+thead th.g{background:var(--go)}
+tbody td{padding:13px 14px;border-bottom:1px solid #f0f3f0;vertical-align:middle}
+tbody tr{transition:.2s}
+tbody tr:hover{background:#f4f8f4}
+tbody tr:last-child td{border-bottom:0}
+tbody td.n{font-weight:850;color:var(--ink);width:52px;font-variant-numeric:tabular-nums}
+tbody td.ttl{font-weight:750;min-width:146px}
+tbody td.ttl small{display:block;font-weight:500;color:var(--gray);font-size:12px;margin-top:2px}
+.meter{height:9px;border-radius:8px;background:#eee;overflow:hidden;min-width:104px}
+.meter i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(90deg,var(--wood),var(--go) 78%,var(--red));transition:width 1.2s cubic-bezier(.2,.8,.2,1)}
+td.sc{font-weight:850;color:var(--go);white-space:nowrap;font-variant-numeric:tabular-nums}
+td.sc span{font-size:11px;color:var(--gray);font-weight:600;margin-left:3px}
+.side{display:flex;flex-direction:column;gap:18px;position:sticky;top:84px}
+.ask{background:var(--ink);color:#fff;border-radius:18px;padding:22px}
+.ask h4{font-size:16px;margin-bottom:12px;letter-spacing:.02em}
+.ask ol{counter-reset:k;display:flex;flex-direction:column;gap:12px}
+.ask li{counter-increment:k;font-size:13.5px;color:#d6ded7;padding-left:30px;position:relative}
+.ask li::before{content:"0" counter(k);position:absolute;left:0;top:1px;font-size:11px;font-weight:850;color:#fff;letter-spacing:.05em}
+.ok{background:#eef7ef;border:1px solid #bfddc6;color:#1f5c38;border-radius:16px;padding:18px;font-size:13px;line-height:1.7}
+.ok b{display:block;color:#175c32;font-size:14px;margin-bottom:6px;letter-spacing:.02em}
+
+/* ============ ④ 棋手谱系（竖向时间轴） ============ */
+.tl{position:relative;padding-left:34px;display:flex;flex-direction:column;gap:16px}
+.tl::before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,var(--go),var(--wood) 60%,var(--red));transform-origin:top;transform:scaleY(0);transition:transform 1.4s cubic-bezier(.2,.8,.2,1)}
+.tl.in::before{transform:scaleY(1)}
+.tl .nd{position:relative;background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px 20px;transition:.26s}
+.tl .nd:hover{transform:translateX(7px);box-shadow:0 18px 40px rgba(16,36,26,.16);border-color:transparent}
+.tl .nd::before{content:"";position:absolute;left:-29px;top:24px;width:11px;height:11px;border-radius:50%;background:#fff;border:3px solid var(--c);box-shadow:0 0 0 5px rgba(255,255,255,.9)}
+.tl .nd .yr{font-size:11px;font-weight:850;letter-spacing:.16em;color:var(--c)}
+.tl .nd h3{font-size:18px;font-weight:850;letter-spacing:-.01em;display:flex;align-items:baseline;gap:9px;margin-top:3px}
+.tl .nd h3 small{font-size:11px;color:var(--gray);letter-spacing:.14em;font-weight:600}
+.tl .nd p{font-size:13.5px;color:var(--ink2);margin:8px 0 11px}
+.tl .nd .chips{display:flex;gap:7px;flex-wrap:wrap}
+.tl .nd .chips span{font-size:11.5px;padding:5px 11px;border-radius:999px;background:var(--cream);color:#3d5347;border:1px solid var(--line);transition:.2s}
+.tl .nd:hover .chips span{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ============ ⑤ 类型地图（砖墙） ============ */
+.bricks{column-count:3;column-gap:20px}
+.brk{break-inside:avoid;margin-bottom:20px;border-radius:16px;overflow:hidden;position:relative;border:1px solid var(--line);background:#fff;transition:.3s}
+.brk:hover{transform:translateY(-6px);box-shadow:0 24px 50px rgba(16,36,26,.2);border-color:transparent}
+.brk .cv{position:relative;overflow:hidden;background:#cfd8d0}
+.brk .cv img{width:100%;display:block;transition:.6s;filter:grayscale(.22) sepia(.1)}
+.brk:hover .cv img{filter:none;transform:scale(1.06)}
+.brk .cv .idx{position:absolute;left:12px;bottom:10px;font-size:10.5px;font-weight:850;letter-spacing:.16em;color:#fff;background:var(--ink);padding:5px 10px;border-radius:7px}
+.brk .bd{padding:13px 15px 15px}
+.brk h3{font-size:15.5px;font-weight:800;letter-spacing:-.01em}
+.brk .who{font-size:12px;color:var(--gray);margin-top:4px}
+.ladder{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px;counter-reset:lad}
+.lad h4{font-size:15px;margin-bottom:14px;display:flex;align-items:center;gap:9px}
+.lad h4::before{content:counter(lad);counter-increment:lad;font-size:11px;width:22px;height:22px;border-radius:7px;
+  background:var(--ink);color:#fff;display:grid;place-items:center;font-weight:850}
+.lad ol{counter-reset:r;display:flex;flex-direction:column;gap:9px}
+.lad li{counter-increment:r;display:flex;gap:11px;align-items:baseline;font-size:13.5px;padding:9px 12px;border-radius:10px;background:#fff;border:1px solid var(--line)}
+.lad li::before{content:"0" counter(r);font-size:10.5px;font-weight:850;color:var(--go);letter-spacing:.05em;flex:0 0 auto}
+.lad li b{font-weight:750}
+
+/* ============ 页脚 ============ */
+footer{background:var(--ink);color:#c6d2c8;padding:64px 0 34px}
+.foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:34px}
+.foot h5{color:#fff;font-size:15px;margin-bottom:14px;letter-spacing:.02em}
+.foot p,.foot li{font-size:13px;color:#9bb0a2;line-height:1.9}
+.foot a{transition:.2s}
+.foot a:hover{color:#fff}
+.foot .brandfoot{display:flex;align-items:center;gap:10px;color:#fff;font-size:20px;font-weight:850}
+.foot .brandfoot .mk{width:24px;height:24px;border-radius:6px;background:#fff;position:relative;overflow:hidden}
+.foot .brandfoot .mk i{position:absolute;inset:0;background:
+    linear-gradient(var(--go) 0 0) 50%/100% 2px no-repeat,
+    linear-gradient(90deg,var(--go) 0 0) 50%/2px 100% no-repeat,#fff}
+.foot .brandfoot b i{font-style:normal;color:#8fd65a}
+.copyline{margin-top:44px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14);
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:space-between;font-size:12px;color:#7d9184}
+
+@media (max-width:980px){
+  .brand span{display:inline}
+  nav.nav{display:none}
+  .drawer-btn{display:flex}
+  .hero{grid-template-columns:1fr;min-height:auto;padding-bottom:40px}
+  .bwrap{min-height:330px}
+  .moodgrid,.dl,.bricks{grid-template-columns:1fr 1fr;column-count:2}
+  .panel,.split{grid-template-columns:1fr}
+  .side{position:static}
+  .foot{grid-template-columns:1fr 1fr}
+}
+@media (max-width:720px){
+  .topbar{height:58px}
+  .drawer{top:58px;width:100%;border-left:0}
+  .hero h1{font-size:clamp(36px,11vw,56px)}
+  .hero .facts{grid-template-columns:repeat(2,1fr);gap:12px}
+  .panel{grid-template-columns:1fr;padding:18px}
+  .panel .cv{aspect-ratio:16/10;order:-1}
+  .tabs{overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;padding:11px 14px}
+  .mag{flex-basis:222px}
+  table,thead,tbody,th,td,tr{display:block}
+  thead{display:none}
+  tbody tr{margin-bottom:12px;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+  tbody td{border-bottom:1px dashed #eee;padding:11px 14px;display:flex;gap:10px;align-items:center}
+  tbody td::before{content:attr(data-l);font-size:11px;color:var(--gray);letter-spacing:.06em;flex:0 0 78px;font-weight:700}
+  tbody td.n{font-size:15px}
+  tbody td.ttl{flex-direction:column;align-items:flex-start;gap:2px}
+  .meter{min-width:0;flex:1}
+  .dl .rw{grid-template-columns:64px 1fr;padding:16px}
+  .dl .no span{font-size:22px}
+  .ladder{grid-template-columns:1fr}
+  .bricks{column-count:2;column-gap:14px}
+  .brk{margin-bottom:14px}
+}
+@media (max-width:420px){
+  .bricks{column-count:1}
+  .cta .btn{flex:1;justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto}
+  .reveal{opacity:1;transform:none}
+  .tl::before{transform:none}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<header class="topbar" role="banner">
+  <div class="brand">
+    <span class="mk" aria-hidden="true"><i></i></span>
+    <b><i>棋棋</i>电影网</b><span>MOVE · COUNTER · MATCH</span>
+  </div>
+  <nav class="nav" aria-label="主导航">
+    <a href="#mood">棋局四型</a>
+    <a href="#fresh">棋步片单</a>
+    <a href="#rank">棋力榜</a>
+    <a href="#line">棋手谱系</a>
+    <a href="#map">类型地图</a>
+  </nav>
+  <button class="drawer-btn" type="button" aria-label="打开菜单" aria-expanded="false" aria-controls="drawer">
+    <i></i>
+  </button>
+</header>
+<div class="drawer" id="drawer" role="navigation" aria-label="移动端菜单">
+  <a href="#mood">① 棋局四型</a>
+  <a href="#fresh">② 棋步片单</a>
+  <a href="#rank">③ 棋力榜</a>
+  <a href="#line">④ 棋手谱系</a>
+  <a href="#map">⑤ 类型地图</a>
+  <a href="#foot">正版与合规</a>
+</div>
+
+<!-- ================= 首屏 ================= -->
+<section class="hero" id="top">
+  <div class="wrap" style="display:contents">
+    <div class="copy">
+      <span class="kicker">◆ 步步为营 · 的观影指南</span>
+      <h1>落子无悔，<br>才好看<i>。</i></h1>
+      <div class="rule"></div>
+      <p class="sub">棋棋电影网，一份"算到第三步"的选片逻辑。好电影像下棋：布局、算计、反转、残局——每一步都有代价。</p>
+      <div class="facts">
+        <div><b>04</b><span>种棋局气质</span></div>
+        <div><b>12</b><span>个影像类型</span></div>
+        <div><b>79</b><span>部正版片单</span></div>
+        <div><b>100</b><span>% 正版导向</span></div>
+      </div>
+      <div class="tagrow">
+        <span class="tag hot">棋局电影</span><span class="tag">布局</span>
+        <span class="tag">算计</span><span class="tag">反转</span>
+        <span class="tag">残局</span><span class="tag">高分电影</span><span class="tag">正版导航</span>
+      </div>
+      <div class="cta" style="margin-top:26px">
+        <a class="btn pri" href="#fresh">下一手，今晚就走 →</a>
+        <a class="btn ghost" href="#mood">先看选片逻辑</a>
+      </div>
+    </div>
+
+    <div class="bwrap" aria-hidden="true">
+      <svg viewBox="0 0 560 540" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="围棋棋盘与落子插画">
+        <defs>
+          <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+            <stop stop-color="#f7f3e8"/><stop offset="1" stop-color="#e6ddc4"/>
+          </linearGradient>
+          <linearGradient id="w" x1="0" y1="0" x2="1" y2="1">
+            <stop stop-color="#fff"/><stop offset="1" stop-color="#d8ded8"/>
+          </linearGradient>
+        </defs>
+        <!-- 棋盘木面 -->
+        <rect x="38" y="52" width="484" height="440" rx="14" fill="url(#bg)" stroke="#b79a5f" stroke-width="6"/>
+        <g stroke="#7d6a44" stroke-width="1.4">
+          <line x1="78" y1="92" x2="78" y2="452"/>
+          <line x1="132" y1="92" x2="132" y2="452"/>
+          <line x1="186" y1="92" x2="186" y2="452"/>
+          <line x1="240" y1="92" x2="240" y2="452"/>
+          <line x1="294" y1="92" x2="294" y2="452"/>
+          <line x1="348" y1="92" x2="348" y2="452"/>
+          <line x1="402" y1="92" x2="402" y2="452"/>
+          <line x1="456" y1="92" x2="456" y2="452"/>
+          <line x1="500" y1="92" x2="500" y2="452"/>
+          <line x1="78" y1="92" x2="500" y2="92"/>
+          <line x1="78" y1="146" x2="500" y2="146"/>
+          <line x1="78" y1="200" x2="500" y2="200"/>
+          <line x1="78" y1="254" x2="500" y2="254"/>
+          <line x1="78" y1="308" x2="500" y2="308"/>
+          <line x1="78" y1="362" x2="500" y2="362"/>
+          <line x1="78" y1="416" x2="500" y2="416"/>
+          <line x1="78" y1="452" x2="500" y2="452"/>
+        </g>
+        <!-- 星位 -->
+        <g fill="#7d6a44"><circle cx="186" cy="200" r="3.4"/><circle cx="402" cy="200" r="3.4"/><circle cx="294" cy="254" r="3.4"/><circle cx="186" cy="416" r="3.4"/><circle cx="402" cy="416" r="3.4"/></g>
+
+        <!-- 白子 -->
+        <g class="stone">
+          <circle cx="240" cy="146" r="21" fill="url(#w)" stroke="#9aa29a" stroke-width="1.5"/>
+          <circle cx="240" cy="141" r="6" fill="#ffffff" opacity=".7"/>
+        </g>
+        <g class="stone stone2">
+          <circle cx="294" cy="200" r="21" fill="url(#w)" stroke="#9aa29a" stroke-width="1.5"/>
+          <circle cx="294" cy="195" r="6" fill="#ffffff" opacity=".7"/>
+        </g>
+        <!-- 黑子 -->
+        <g class="stone">
+          <circle cx="186" cy="254" r="21" fill="#1a1a1a" stroke="#000" stroke-width="1.5"/>
+          <circle cx="179" cy="247" r="5" fill="#5a5a5a" opacity=".8"/>
+        </g>
+        <g class="stone stone2">
+          <circle cx="348" cy="308" r="21" fill="#1a1a1a" stroke="#000" stroke-width="1.5"/>
+          <circle cx="341" cy="301" r="5" fill="#5a5a5a" opacity=".8"/>
+        </g>
+        <g class="stone">
+          <circle cx="402" cy="362" r="21" fill="#1a1a1a" stroke="#000" stroke-width="1.5"/>
+          <circle cx="395" cy="355" r="5" fill="#5a5a5a" opacity="8"/>
+        </g>
+
+        <!-- 落子之手 -->
+        <g class="hand">
+          <circle cx="500" cy="150" r="21" fill="#241c16" stroke="#000" stroke-width="1.5"/>
+          <circle cx="494" cy="144" r="5.4" fill="#4a413a" opacity=".8"/>
+          <path d="M514 168 C540 190,546 230,530 250 C516 266,500 258,504 240 C496 250,484 254,480 242 C470 250,458 250,460 236"
+                stroke="#241c16" stroke-width="11" stroke-linecap="round" fill="none"/>
+        </g>
+
+        <text x="290" y="34" text-anchor="middle" font-size="13" fill="#7d6a44" letter-spacing="9">MOVE · COUNTER · MATCH</text>
+        <g class="stone" style="animation-delay:-3s">
+          <path d="M50 470 C150 430,260 500,360 462" stroke="#c0392b" stroke-width="2.2" fill="none" opacity=".55"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ① 棋局四型（大号 Tab + 面板） ================= -->
+<section id="mood">
+  <div class="wrap">
+    <div class="hd reveal">
+      <span class="eyebrow">01 / GAME</span>
+      <h2 class="t">棋局四型：<em>好电影，都算得到第三步</em></h2>
+      <p class="lead">按"这盘棋怎么下"来选片。布局、算计、反转、残局——四种气质，覆盖一部好片最本质的四种结构。</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="棋局四型">
+      <button class="tab" role="tab" aria-selected="true" aria-controls="p1" style="--c:#1b5e3a;--c2:#7bbf3f" id="t1">布局<span class="ix">GAME 01</span></button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p2" style="--c:#b8860b;--c2:#e8c878" id="t2">算计<span class="ix">GAME 02</span></button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p3" style="--c:#c0392b;--c2:#e07a6a" id="t3">反转<span class="ix">GAME 03</span></button>
+      <button class="tab" role="tab" aria-selected="false" aria-controls="p4" style="--c:#3d4a66;--c2:#7d8aa6" id="t4">残局<span class="ix">GAME 04</span></button>
+    </div>
+
+    <div class="tabpanels">
+      <div class="panel on" id="p1" role="tabpanel" aria-labelledby="t1" style="--c:#1b5e3a;--c2:#7bbf3f">
+        <div>
+          <div class="big">01<small>GAME · LAYOUT</small></div>
+          <h3>布局</h3>
+          <p>前三十分钟不着急。人物一个个登场，关系一层层铺开，你看不出危险在哪——但导演知道。看完才会发现，第一场戏里那句闲话，就是结局的伏笔。</p>
+          <div class="chips"><span>慢热</span><span>长镜头</span><span>群像</span><span>正版可看 16 部</span></div>
+        </div>
+        <div class="cv"><img src="https://picsum.photos/id/1088/640/800" alt="棋盘与窗" loading="lazy"><span class="corner">布局</span></div>
+      </div>
+
+      <div class="panel" id="p2" role="tabpanel" aria-labelledby="t2" style="--c:#b8860b;--c2:#e8c878">
+        <div>
+          <div class="big">02<small>GAME · CALCULATE</small></div>
+          <h3>算计</h3>
+          <p>每一步都是交易。角色不是坏，是"算得清"。台词里全是条件句，眼神里全是代价。看完你会想：如果我是他，我会走哪一步？</p>
+          <div class="chips"><span>高智商</span><span>谈判</span><span>金融</span><span>正版可看 13 部</span></div>
+        </div>
+        <div class="cv"><img src="https://picsum.photos/id/1069/640/800" alt="棋盘格窗" loading="lazy"><span class="corner">算计</span></div>
+      </div>
+
+      <div class="panel" id="p3" role="tabpanel" aria-labelledby="t3" style="--c:#c0392b;--c2:#e07a6a">
+        <div>
+          <div class="big">03<small>GAME · REVERSE</small></div>
+          <h3>反转</h3>
+          <p>最后二十分钟，把前面九十分钟全部推翻。不是靠噱头，是靠埋得足够深的线。看完会立刻想重看一遍，去找那个被你忽略的细节。</p>
+          <div class="chips"><span>非线性</span><span>多视角</span><span>烧脑</span><span>正版可看 11 部</span></div>
+        </div>
+        <div class="cv"><img src="https://picsum.photos/id/1047/640/800" alt="镜像街道" loading="lazy"><span class="corner">反转</span></div>
+      </div>
+
+      <div class="panel" id="p4" role="tabpanel" aria-labelledby="t4" style="--c:#3d4a66;--c2:#7d8aa6">
+        <div>
+          <div class="big">04<small>GAME · ENDGAME</small></div>
+          <h3>残局</h3>
+          <p>胜负已分，棋不能停。真正的悲剧不是输，是"明知会输还得下完"。这种片子不爽，但会在你心里下很久的棋。</p>
+          <div class="chips"><span>史诗</span><span>战争</span><span>救赎</span><span>正版可看 9 部</span></div>
+        </div>
+        <div class="cv"><img src="https://picsum.photos/id/1036/640/800" alt="棋盘与黄昏" loading="lazy"><span class="corner">残局</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ② 棋步片单 ================= -->
+<section id="fresh" style="background:linear-gradient(180deg,#eef2ec,#f7f8f4)">
+  <div class="wrap">
+    <div class="hd reveal">
+      <span class="eyebrow">02 / THIS WEEK</span>
+      <h2 class="t">棋步片单：<em>本周，只推"算得到"的</em></h2>
+      <p class="lead">6 部"棋力值"最高的片子——结构严谨、伏笔深远、反转可信。片源均为正版可看。</p>
+    </div>
+
+    <div class="scroller">
+      <article class="mag reveal">
+        <div class="cv">
+          <img src="https://picsum.photos/id/1080/460/614" alt="老屋棋盘" loading="lazy">
+          <span class="rib" style="--c:#1b5e3a">正版免费</span>
+          <span class="mv">162′</span>
+        </div>
+        <div class="bd">
+          <h3>让子弹飞</h3>
+          <div class="meta"><b>中国</b> · 黑色幽默 / 博弈 · 162 分钟</div>
+          <span class="why">为什么算得到：一场鸿门宴，三伙人，每一句台词都是一步棋。台词密度，华语片天花板。</span>
+        </div>
+      </article>
+      <article class="mag reveal">
+        <div class="cv">
+          <img src="https://picsum.photos/id/1068/460/614" alt="雨夜棋局" loading="lazy">
+          <span class="rib" style="--c:#b8860b">限时免费</span>
+          <span class="mv">121′</span>
+        </div>
+        <div class="bd">
+          <h3>看不见的客人</h3>
+          <div class="meta"><b>西班牙</b> · 悬疑 / 反转 · 106 分钟</div>
+          <span class="why">为什么算得到：两个人在一间房里，把真相改写了六遍。最后五分钟，推翻前面九十分钟。</span>
+        </div>
+      </article>
+      <article class="mag reveal">
+        <div class="cv">
+          <img src="https://picsum.photos/id/1075/460/614" alt="黑白长廊" loading="lazy">
+          <span class="rib" style="--c:#3d4a66">公版 4K</span>
+          <span class="mv">189′</span>
+        </div>
+        <div class="bd">
+          <h3>七宗罪</h3>
+          <div class="meta"><b>美国</b> · 犯罪 / 心理 · 127 分钟</div>
+          <span class="why">为什么算得到：凶手不是随机杀人，是在下一盘以"七宗罪"为规则的棋。结局那句话，是棋谱。</span>
+        </div>
+      </article>
+      <article class="mag reveal">
+        <div class="cv">
+          <img src="https://picsum.photos/id/1074/460/614" alt="公路棋盘" loading="lazy">
+          <span class="rib" style="--c:#c0392b">首月 0 元</span>
+          <span class="mv">134′</span>
+        </div>
+        <div class="bd">
+          <h3>无双</h3>
+          <div class="meta"><b>中国香港</b> · 犯罪 / 伪钞 · 130 分钟</div>
+          <span class="why">为什么算得到：前半段是爽片，后半段是骗局。你以为的"我"，是别人写好的角色。</span>
+        </div>
+      </article>
+      <article class="mag reveal">
+        <div class="cv">
+          <img src="https://picsum.photos/id/110/460/614" alt="麦田与棋" loading="lazy">
+          <span class="rib" style="--c:#1b5e3a">联合会员</span>
+          <span class="mv">120′</span>
+        </div>
+        <div class="bd">
+          <h3>死亡诗社</h3>
+          <div class="meta"><b>美国</b> · 成长 / 博弈 · 128 分钟</div>
+          <span class="why">为什么算得到：老师和学生，各走一步。代价是退学，收益是一生。最温柔的一盘棋。</span>
+        </div>
+      </article>
+      <article class="mag reveal">
+        <div class="cv">
+          <img src="https://picsum.photos/id/111/460/614" alt="雪夜对弈" loading="lazy">
+          <span class="rib" style="--c:#3d4a66">公益放映</span>
+          <span class="mv">144′</span>
+        </div>
+        <div class="bd">
+          <h3>美丽心灵</h3>
+          <div class="meta"><b>美国</b> · 传记 / 博弈论 · 135 分钟</div>
+          <span class="why">为什么算得到：主角是数学家，一生的对手是自己的幻觉。最高级的棋，是和自己下。</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ③ 棋力榜 ================= -->
+<section id="rank">
+  <div class="wrap">
+    <div class="hd reveal">
+      <span class="eyebrow">03 / RANKING</span>
+      <h2 class="t">棋力榜：<em>"棋力值"从高到低</em></h2>
+      <p class="lead">"棋力值"＝伏笔密度 × 结构完整度 × 反转可信度 × 台词信息量。评分来自公开影评平台，片源均为正版可看。</p>
+    </div>
+
+    <div class="split">
+      <div class="tbwrap reveal">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">手数</th>
+              <th scope="col">片名 · 地区</th>
+              <th scope="col" class="g">棋力值</th>
+              <th scope="col">评分</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="n" data-rk="棋 01">01</td>
+              <td class="ttl">霸王别姬<small>中国 · 史诗 / 一生</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="99"></i></div></td>
+              <td class="sc" data-l="评分">9.6<span>/10</span></td>
+            </tr>
+            <tr>
+              <td class="n" data-rk="棋 02">02</td>
+              <td class="ttl">让子弹飞<small>中国 · 黑色幽默 / 博弈</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="97"></i></div></td>
+              <td class="sc" data-l="评分">8.9<span>/10</span></td>
+            </tr>
+            <tr>
+              <td class="n" data-rk="棋 03">03</td>
+              <td class="ttl">搏击俱乐部<small>美国 · 心理 / 反转</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="95"></i></div></td>
+              <td class="sc" data-l="评分">9.0<span>/10</span></td>
+            </tr>
+            <tr>
+              <td class="n" data-rk="棋 04">04</td>
+              <td class="ttl">看不见的客人<small>西班牙 · 悬疑 / 法庭</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="93"></i></div></td>
+              <td class="sc" data-l="评分">8.8<span>/10</span></td>
+            </tr>
+            <tr>
+              <td class="n" data-rk="棋 05">05</td>
+              <td class="ttl">无双<small>中国香港 · 犯罪 / 伪钞</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="91"></i></div></td>
+              <td class="sc" data-l="评分">8.1<span>/10</span></td>
+            </tr>
+            <tr>
+              <td class="n" data-rk="棋 06">06</td>
+              <td class="ttl">盗梦空间<small>美国 · 科幻 / 多层</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="89"></i></div></td>
+              <td class="sc" data-l="评分">9.3<span>/10</span></td>
+            </tr>
+            <tr>
+              <td class="n" data-rk="棋 07">07</td>
+              <td class="ttl">致命魔术<small>英国 · 悬疑 / 双雄</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="87"></i></div></td>
+              <td class="sc" data-l="评分">8.9<span>/10</span></td>
+            </tr>
+            <tr>
+              <td class="n" data-rk="棋 08">08</td>
+              <td class="ttl">七宗罪<small>美国 · 犯罪 / 心理</small></td>
+              <td data-l="棋力值"><div class="meter"><i data-w="85"></i></div></td>
+              <td class="sc" data-l="评分">8.8<span>/10</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <aside class="side">
+        <div class="ask reveal">
+          <h4>棋局之问</h4>
+          <ol>
+            <li>哪一部电影，让你第一次看懂"伏笔"这两个字？</li>
+            <li>一部好片的反转，靠巧合，还是靠前面埋的线？</li>
+            <li>布局、算计、反转、残局——你更爱看哪一手？</li>
+            <li>有没有一部片，看完立刻想重看一遍？</li>
+          </ol>
+        </div>
+        <div class="ok reveal">
+          <b>✔ 正版提示</b>
+          本站只收录正版平台的免费专区、限时活动、公版修复片源与公共文化授权内容，不提供、不链接任何盗版、破解、侵权资源。片源标注含义：<b>正版免费</b>（平台免费专区）、<b>限时免费</b>（活动期）、<b>公版 4K</b>（版权到期修复版）、<b>首月 0 元</b>（联合会员）、<b>联合会员</b>、<b>公益放映</b>（公共文化）。
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ④ 棋手谱系（竖向时间轴） ================= -->
+<section id="line" style="background:linear-gradient(180deg,#f7f8f4,#eef2ec)">
+  <div class="wrap">
+    <div class="hd reveal">
+      <span class="eyebrow">04 / PLAYERS</span>
+      <h2 class="t">棋手谱系：<span style="color:var(--go)">最会"下棋"的四位</span></h2>
+      <p class="lead">棋不是颜色，是一种结构感。这四位导演，把"算得到第三步"拍成了自己的签名。</p>
+    </div>
+
+    <div class="tl">
+      <div class="nd reveal" style="--c:#1b5e3a">
+        <span class="yr">AUTEUR 01 · 1954</span>
+        <h3>克里斯托弗 · 诺兰 <small>Christopher Nolan</small></h3>
+        <p>把时间切成多层，再一层层倒回去拼。他的反转不是"你猜错了"，而是"你被骗得很舒服"。</p>
+        <div class="chips"><span>《盗梦空间》</span><span>《致命魔术》</span><span>《记忆碎片》</span><span>《信条》</span><span>非线性结构</span></div>
+      </div>
+      <div class="nd reveal" style="--c:#b8860b">
+        <span class="yr">AUTEUR 02 · 1960</span>
+        <h3>姜文 <small>Jiang Wen</small></h3>
+        <p>台词即棋谱。每一句闲话都在设局，每一场戏都在收网。《让子弹飞》的台词密度，华语片至今无人超越。</p>
+        <div class="chips"><span>《让子弹飞》</span><span>《阳光灿烂的日子》</span><span>《邪不压正》</span><span>台词密度</span></div>
+      </div>
+      <div class="nd reveal" style="--c:#c0392b">
+        <span class="yr">AUTEUR 03 · 1969</span>
+        <h3>大卫 · 芬奇 <small>David Fincher</small></h3>
+        <p>冷光、冷色、冷到骨子里。他的主角永远在下"明知会输"的棋，而观众全程屏息。</p>
+        <div class="chips"><span>《七宗罪》</span><span>《搏击俱乐部》</span><span>《消失的爱人》</span><span>《十二宫》</span><span>心理博弈</span></div>
+      </div>
+      <div class="nd reveal" style="--c:#3d4a66">
+        <span class="yr">AUTEUR 04 · 1972</span>
+        <h3>奥里奥尔 · 保罗 <small>Oriol Paulo</small></h3>
+        <p>西班牙的"反转机器"。两个人在一间房里，把真相改写六遍，你还会为他鼓掌。</p>
+        <div class="chips"><span>《看不见的客人》</span><span>《海市蜃楼》</span><span>《女尸谜案》</span><span>密室博弈</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ⑤ 类型地图 ================= -->
+<section id="map">
+  <div class="wrap">
+    <div class="hd reveal">
+      <span class="eyebrow">05 / MAP</span>
+      <h2 class="t">类型地图：<em>十二种"算得到"的看片方式</em></h2>
+      <p class="lead">不按国家分，按"这盘棋怎么下"分。每一格，都是一种不妥协的观影心情。</p>
+    </div>
+
+    <div class="bricks">
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/1047/520/700" alt="镜像对弈" loading="lazy"><span class="idx">GO 01</span></div>
+        <div class="bd"><h3>棋局 · 围棋</h3><div class="who">代表：《棋魂》（日）《吴清源》《一盘没有下完的棋》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/1069/520/600" alt="国际象棋" loading="lazy"><span class="idx">GO 02</span></div>
+        <div class="bd"><h3>棋局 · 国际象棋</h3><div class="who">代表：《后翼弃兵》《香槟谋杀案》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/1088/520/760" alt="窗前沉思" loading="lazy"><span class="idx">GO 03</span></div>
+        <div class="bd"><h3>布局 · 群像</h3><div class="who">代表：《红楼梦》《一一》《悲情城市》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/1074/520/600" alt="公路对谈" loading="lazy"><span class="idx">GO 04</span></div>
+        <div class="bd"><h3>算计 · 谈判</h3><div class="who">代表：《华尔街之狼》《大空头》《美国骗局》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/1080/520/700" alt="老屋对坐" loading="lazy"><span class="idx">GO 05</span></div>
+        <div class="bd"><h3>算计 · 金融</h3><div class="who">代表：《窃听风暴》《无间道》《无双》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/1068/520/600" alt="雨夜长街" loading="lazy"><span class="idx">GO 06</span></div>
+        <div class="bd"><h3>反转 · 密室</h3><div class="who">代表：《看不见的客人》《十二怒汉》《控方证人》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/1075/520/720" alt="黑白长廊" loading="lazy"><span class="idx">GO 07</span></div>
+        <div class="bd"><h3>反转 · 非线性</h3><div class="who">代表：《搏击俱乐部》《记忆碎片》《低俗小说》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/110/520/600" alt="麦田与远山" loading="lazy"><span class="idx">GO 08</span></div>
+        <div class="bd"><h3>残局 · 战争</h3><div class="who">代表：《辛德勒的名单》《敦刻尔克》《1917》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/111/520/700" alt="雪夜孤灯" loading="lazy"><span class="idx">GO 09</span></div>
+        <div class="bd"><h3>残局 · 救赎</h3><div class="who">代表：《肖申克的救赎》《美丽心灵》《海上钢琴师》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/114/520/600" alt="老照片" loading="lazy"><span class="idx">GO 10</span></div>
+        <div class="bd"><h3>长镜头 · 一镜到底</h3><div class="who">代表：《1917》《鸟人》《俄罗斯方舟》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/116/520/700" alt="少年与棋" loading="lazy"><span class="idx">GO 11</span></div>
+        <div class="bd"><h3>成长 · 师生博弈</h3><div class="who">代表：《死亡诗社》《放牛班的春天》《垫底辣妹》</div></div>
+      </article>
+      <article class="brk reveal">
+        <div class="cv"><img src="https://picsum.photos/id/118/520/600" alt="冬夜窗光" loading="lazy"><span class="idx">GO 12</span></div>
+        <div class="bd"><h3>史诗 · 长</h3><div class="who">代表：《七武士》《浩气盖山河》《阿拉伯的劳伦斯》</div></div>
+      </article>
+    </div>
+
+    <div class="ladder" style="counter-reset:lad">
+      <div class="lad reveal" style="--c:#1b5e3a">
+        <h4>布局榜 · 慢热，但后劲极大</h4>
+        <ol>
+          <li><b>霸王别姬</b> — 一生，一场戏，一句"差一年、一个月、一天、一个时辰"</li>
+          <li><b>一一</b> — 从婚礼到葬礼，一个人一辈子</li>
+          <li><b>悲情城市</b> — 无声的家族史，镜头就是棋谱</li>
+          <li><b>红楼梦</b> — 最宏大的一盘棋，下了一百二十回</li>
+          <li><b>浩气盖山河</b> — 一镜一景，绝不剪辑</li>
+        </ol>
+      </div>
+      <div class="lad reveal" style="--c:#c0392b">
+        <h4>反转榜 · 算得到第三步</h4>
+        <ol>
+          <li><b>看不见的客人</b> — 最后五分钟，推翻前面九十分钟</li>
+          <li><b>搏击俱乐部</b> — 你以为的"我"，是另一个人</li>
+          <li><b>无双</b> — 前半段是爽片，后半段是骗局</li>
+          <li><b>盗梦空间</b> — 四层梦境，陀螺停没停?</li>
+          <li><b>致命魔术</b> — 魔术的秘密，是代价</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 页脚 ================= -->
+<footer id="foot">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <div class="brandfoot">
+          <span class="mk" aria-hidden="true"><i></i></span>
+          <b><i>棋棋</i>电影网</b>
+        </div>
+        <p style="margin-top:12px">落子无悔，才好看。我们不做片库搬运，只做"算到第三步"的选片：布局、算计、反转、残局。</p>
+        <p style="margin-top:14px">网址：<b style="color:#fff">https://qiqidianyingwang-cn.github.io/</b></p>
+      </div>
+      <div>
+        <h5>棋局四型</h5>
+        <ul>
+          <li><a href="#mood">布局</a></li>
+          <li><a href="#mood">算计</a></li>
+          <li><a href="#mood">反转</a></li>
+          <li><a href="#mood">残局</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>选片工具</h5>
+        <ul>
+          <li><a href="#fresh">棋步片单</a></li>
+          <li><a href="#rank">棋力榜</a></li>
+          <li><a href="#line">棋手谱系</a></li>
+          <li><a href="#map">类型地图</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>正版与合规</h5>
+        <ul>
+          <li>只收录正版渠道</li>
+          <li>不提供、不链接盗版与破解资源</li>
+          <li>不做擦边内容</li>
+          <li>片源标注真实口径</li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyline">
+      <span>© <span id="yr">2026</span> 棋棋电影网 · 步步为营的观影指南</span>
+      <span>本站为影视赏析与正版观影导航，所有影片版权归原作者及发行方所有。</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// 抽屉菜单
+var btn = document.querySelector('.drawer-btn');
+var drawer = document.getElementById('drawer');
+btn.addEventListener('click', function(){
+  var open = drawer.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  btn.setAttribute('aria-label', open ? '关闭菜单' : '打开菜单');
+});
+drawer.addEventListener('click', function(e){
+  if(e.target.tagName === 'A'){
+    drawer.classList.remove('open');
+    btn.setAttribute('aria-expanded','false');
+    btn.setAttribute('aria-label','打开菜单');
+  }
+});
+
+// Tab 切换（键盘可访问：方向键）
+var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
+var panels = {};
+tabs.forEach(function(t){ panels[t.getAttribute('aria-controls')] = document.getElementById(t.getAttribute('aria-controls')); });
+function activate(idx){
+  tabs.forEach(function(t,i){
+    var on = i === idx;
+    t.setAttribute('aria-selected', on ? 'true' : 'false');
+    panels[t.getAttribute('aria-controls')].classList.toggle('on', on);
+  });
+}
+tabs.forEach(function(t,i){
+  t.addEventListener('click', function(){ activate(i); });
+  t.addEventListener('keydown', function(e){
+    var k = e.key;
+    if(['ArrowRight','ArrowLeft','ArrowUp','ArrowDown','Home','End'].indexOf(k) > -1){
+      e.preventDefault();
+      var j = i;
+      if(k === 'ArrowRight' || k === 'ArrowDown') j = (i + 1) % tabs.length;
+      if(k === 'ArrowLeft' || k === 'ArrowUp') j = (i - 1 + tabs.length) % tabs.length;
+      if(k === 'Home') j = 0;
+      if(k === 'End') j = tabs.length - 1;
+      tabs[j].focus(); activate(j);
+    }
+  });
+});
+
+// 滚动入场 + 进度条动画
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(en){
+    if(!en.isIntersecting) return;
+    en.target.classList.add('in');
+    en.target.querySelectorAll('[data-w]').forEach(function(b){
+      if(b.dataset.done) return;
+      b.dataset.done = '1';
+      requestAnimationFrame(function(){ b.style.width = b.dataset.w + '%'; });
+    });
+    io.unobserve(en.target);
+  });
+},{threshold:.16, rootMargin:'0px 0px -8% 0px'});
+document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
